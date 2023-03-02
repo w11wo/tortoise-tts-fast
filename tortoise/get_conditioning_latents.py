@@ -31,11 +31,17 @@ if __name__ == "__main__":
         help="How to average voice latents, 0 for standard, 1 for per-sample, 2 for per-minichunk",
         default=0,
     )
+    parser.add_argument(
+        "--ar_checkpoint",
+        required=False,
+        default=None,
+        help="Specify path to model checkpoint",
+    )
 
     args = parser.parse_args()
     os.makedirs(args.output_path, exist_ok=True)
 
-    tts = TextToSpeech()
+    tts = TextToSpeech(ar_checkpoint=args.ar_checkpoint)
     voices = get_voices()
     print(list(voices.keys()))
     selected_voices = args.voice.split(",")
