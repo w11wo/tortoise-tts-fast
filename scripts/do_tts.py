@@ -20,6 +20,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("--text", required=True, help="Specify input text")
     parser.add_argument("--preset", required=True, help="Specify desired audio quality")
+    parser.add_argument("--half", type=bool, default=False, help="Use half precision")
     parser.add_argument(
         "--voice", default=None, help="Specify audio directory for conditioning latents"
     )
@@ -40,6 +41,7 @@ if __name__ == "__main__":
         voice_samples=voice_samples,
         conditioning_latents=conditioning_latents,
         preset=args.preset,
+        half=args.half,
     )
 
     torchaudio.save(args.output_name, gen.squeeze(0).cpu(), 24000)
