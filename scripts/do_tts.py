@@ -23,6 +23,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--voice", default=None, help="Specify audio directory for conditioning latents"
     )
+    parser.add_argument(
+        "--output_name", default="generated.wav", help="Generated audio file name"
+    )
 
     args = parser.parse_args()
 
@@ -39,4 +42,4 @@ if __name__ == "__main__":
         preset=args.preset,
     )
 
-    torchaudio.save("./output_audio/generated.wav", gen.squeeze(0).cpu(), 24000)
+    torchaudio.save(args.output_name, gen.squeeze(0).cpu(), 24000)
